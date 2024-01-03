@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pilihan Presiden</title>
+    
+</head>
+<body >
+    <style>
+		body {
+			background-image: url("img/background.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			height: 100vh;
+		}
+
+		.table-container {
+			width: 60%;
+		}
+		
+		h4 {
+			font-family: 'Nama-Font', sans-serif;
+			color: white;
+			-webkit-text-stroke: 1px black; 
+			line-height: 1.2;
+			margin: 5px 0;
+		}
+
+
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+            padding-left: 100px;
+			
+			
+        }
+
+        td {
+            position: relative;
+        }
+
+        img {
+            width: 189px;
+            height: 266px;
+            transition: opacity 0.5s ease;
+        }
+
+        img:hover {
+            opacity: 0.7;
+        }
+
+        h3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            color: white;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        p{
+
+            color:blue;
+            font-size: 20px;
+        }
+        mark{
+            background-color: white;
+            color: blue;
+        }
+        
+    </style>
+  <div id="loader">
+    <p class="text-center">Loading Content...</p>
+  </div>
+    <center><h1 style="color:white;">Pilih Presidenmu</h1></center>
+    
+	<br><br><br><br><br>
+	
+	<center>
+    <div id="content" style="display: none;"> 
+        <table class="table">
+            <tr align="center">
+                <td>
+                    <div class="president-cell" onclick="selectPresident(1)">
+                        <img id="president1" src="img/Anies.jpg"1. Ganjar" data-name="Ganjar Pranowo">
+						<h3>1</h3>
+                    </div>
+                </td>
+                <td>
+                    <div class="president-cell" onclick="selectPresident(2)">
+                        <img id="president2" src="img/Prabowo.jpg" alt="1. Ganjar" data-name="Prabowo Subianto">
+						<h3>2</h3>
+                    </div>
+                </td>
+                <td>
+                    <div class="president-cell" onclick="selectPresident(3)">
+                        <img id="president3" src="img/Ganjar.jpg" alt="1. Ganjar" data-name="Anies Baswedan">
+						<h3>3</h3>
+                    </div>
+                </td>
+            </tr>
+            <tbody id="candidatesResults">
+            </tbody>
+        </table>
+        <br><br><br><br>
+        <form onSubmit="App.castVote(); return false;">
+            <div class="form-group">
+              <label for="candidatesSelect">Pilih Paslon</label>
+              <select class="form-control" id="candidatesSelect">
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick=""> Vote</button>
+            <hr/>
+          </form>
+          <p><mark>
+        <b  id="accountAddress" class="text-center"></b></mark></p>
+    </center>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

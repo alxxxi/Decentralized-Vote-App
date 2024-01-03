@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu Pilih Presiden</title>
+    <style>
+		body {
+			background-image: url("img/background.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			height: 100vh;
+		}
+
+		.table-container {
+			width: 60%;
+		}
+		
+		h4 {
+			font-family: 'Nama-Font', sans-serif;
+			color: white;
+			-webkit-text-stroke: 1px black; 
+			line-height: 1.2;
+			margin: 5px 0;
+		}
+
+
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			
+			
+        }
+
+        td {
+            position: relative;
+        }
+
+        img {
+            width: 189px;
+            height: 266px;
+            transition: opacity 0.5s ease;
+        }
+
+        img:hover {
+            opacity: 0.7;
+        }
+
+        h3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            color: white;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body >
+    <center><h1 style="color:white;">Pilih Presidenmu</h1></center>
+    
+	<br><br><br><br><br>	<br><br><br><br><br>	
+	
+	<center>
+        <table>
+            <tr align="center">
+                <td>
+                    <div class="president-cell" onclick="selectPresident(1)">
+                        <img id="president1" src="img/Ganjar.jpg" alt="1. Ganjar" data-name="Ganjar Pranowo">
+						<h3>1</h3>
+                    </div>
+                </td>
+                <td>
+                    <div class="president-cell" onclick="selectPresident(2)">
+                        <img id="president2" src="img/Prabowo.jpg" alt="1. Ganjar" data-name="Prabowo Subianto">
+						<h3>2</h3>
+                    </div>
+                </td>
+                <td>
+                    <div class="president-cell" onclick="selectPresident(3)">
+                        <img id="president3" src="img/Anies.jpg" alt="1. Ganjar" data-name="Anies Baswedan">
+						<h3>3</h3>
+                    </div>
+                </td>
+            </tr>
+			<tr align="center">
+				<td><h4>1. Ganjar Pranowo</h4> </td>
+				<td><h4>2. Prabowo Subianto</h4> </td>
+				<td><h4>3. Anies Baswedan</h4> </td>
+			</tr>
+            <tr align="center">
+                <td colspan="3"><button onclick="submitVote()">Kirim</button></td>
+            </tr>
+        </table>
+    </center>
+
+	<script>
+    function selectPresident(presidentNumber) {
+        // Reset opacity for all images
+        for (let i = 1; i <= 3; i++) {
+            document.getElementById('president' + i).style.opacity = 1;
+        }
+
+        // Set selected image to be slightly transparent
+        document.getElementById('president' + presidentNumber).style.opacity = 0.7;
+    }
+
+    function submitVote() {
+        // Mendapatkan data nama kandidat yang terpilih
+        const selectedCandidate = document.querySelector('.president-cell:hover img').getAttribute('data-name');
+
+        // Mendapatkan elemen gambar yang terpilih
+        const selectedImage = document.querySelector('.president-cell:hover img');
+
+        // Jika gambar sudah transparan, abaikan pemilihan
+        if (selectedImage.style.opacity < 1) {
+            return;
+        }
+
+        // Mengirim pemilihan ke kontrak Solidity menggunakan Web3.js
+        votingContract.methods.vote(selectedCandidate).send({ from: 'YOUR_WALLET_ADDRESS' })
+            .on('transactionHash', function (hash) {
+                // Transaksi telah berhasil dikirim
+
+                // Membuat gambar yang terpilih menjadi lebih transparan dan tetap transparan
+                const selectedPresidentNumber = parseInt(selectedCandidate);
+                selectPresident(selectedPresidentNumber);
+                selectedImage.style.opacity = 0.7;
+
+                alert("Vote submitted!");
+            })
+            .on('error', function (error) {
+                // Terjadi kesalahan dalam pengiriman transaksi
+                console.error(error);
+                alert("Failed to submit vote.");
+            });
+    }
+	</script>
+</body>
+</html>
